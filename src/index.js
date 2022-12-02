@@ -5,10 +5,17 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+
+//ReactDOM.render(e(LikeButton), root);
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+    <App>
+      <h1>
+        Buenaasss
+      </h1>
+    </App>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
