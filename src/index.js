@@ -10,11 +10,8 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 //ReactDOM.render(e(LikeButton), root);
 root.render(
-    <App>
-      <h1>
-        Buenaasss
-      </h1>
-    </App>
+
+    <App/>
 
 );
 
