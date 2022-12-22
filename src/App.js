@@ -6,9 +6,9 @@ import {TodoItem} from "./TodoItem";
 import {CreateTodoButton} from "./CreateTodoButton";
 // import './App.css';
 
-const todos = [
+const defaultTodos = [
   {
-    text: 'Cortar cebolla', completed: false
+    text: 'Cortar cebolla', completed: true
   },
   {
     text: 'Pesar', completed: false
@@ -20,12 +20,22 @@ const todos = [
 
 
 function App(props) {
+  const[todos, setTodos ] =React.useState(defaultTodos)
+  const [searchValue, setSearchValue] = React.useState('');
+  const completedTodos = todos.filter(todo => !!todo.completed).length;
+  const totalTodos = todos.length;
+
   return (
     <React.Fragment>
-      <TodoCounter/>
+      <TodoCounter
+       total={totalTodos}
+       completed={completedTodos}
+       />
 
       
-      <TodoSearch />
+      <TodoSearch
+        searchValue={searchValue}
+        setSearchValue={setSearchValue} />
 
       
       
