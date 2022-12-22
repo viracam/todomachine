@@ -35,7 +35,16 @@ function App(props) {
       return todoText.includes(searchText);
     });
   }
-
+  const completeTodos = (text) =>{
+    const todoIndex = todos.findIndex(todo => todo.text == text);
+    const newTodos = [...todos];
+    newtodos[todoIndex].completed = true;
+    setTodos(newTodos);
+    // todos[todoIndex] = {
+    //   text:todo[todoIndex].text,
+    //   completed: true,
+    // }
+  }
   return (
     <React.Fragment>
       <TodoCounter
