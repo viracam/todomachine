@@ -41,7 +41,7 @@ function App(props) {
     newtodos[todoIndex].completed = true;
     setTodos(newTodos);
     // todos[todoIndex] = {
-    //   text:todo[todoIndex].text,
+    //   text:todo[todoIndex].text, 
     //   completed: true,
     // }
   }
