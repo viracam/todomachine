@@ -8,11 +8,12 @@ import './TodoItem.css';
     const onDelete=() =>{
         alert('Borraste el todo' + props.text);
     };
+    
 
     return(
         <li className="TodoItem">
             <span
-                className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
+                className={`Icon Icon-check ${props.completed &&  'Icon-check--active'}`}
                 onClick={onComplete}>
                 √
             </span>
