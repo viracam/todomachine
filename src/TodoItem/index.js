@@ -5,9 +5,7 @@ import './TodoItem.css';
     // const onComplete=() =>{
     //     alert('Ya completaste el todo' + props.text);
     // };
-    const onDelete=() =>{
-        alert('Borraste el todo' + props.text);
-    };
+   
     
 
     return(
@@ -22,7 +20,7 @@ import './TodoItem.css';
                 >{props.text}</p>
             <span
                 className="Icon Icon-delete"
-                onClick={onDelete}>X</span>
+                onClick={props.onDelete}>X</span>
         </li>
     );
 
