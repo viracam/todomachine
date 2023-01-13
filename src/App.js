@@ -36,7 +36,7 @@ function App(props) {
     });
   }
   const completeTodos = (text) =>{
-    const todoIndex = todos.findIndex(todo => todo.text == text);
+    const todoIndex = todos.findIndex(todo => todo.text === text);
     const newTodos = [...todos];
     newtodos[todoIndex].completed = true;
     setTodos(newTodos);
@@ -63,7 +63,12 @@ function App(props) {
       
         {searchedTodos.map(todo =>(
           
-          <TodoItem key={todo.text} text={todo.text} completed={todo.completed}/>
+          <TodoItem 
+            key={todo.text} 
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeTodos(todo.text) }
+          />
       
         ))}
       
