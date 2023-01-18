@@ -28,7 +28,7 @@ function useLocalStorage(itemName, initialValue){
 
   const saveItem = (newItem) =>{
     const stringifiedItem = JSON.stringify(newItem);
-    localStorage.setItem('itemName', stringifiedItem);
+    localStorage.setItem(itemName, stringifiedItem);
     setItem(newItem);
   };
 
@@ -41,6 +41,7 @@ function useLocalStorage(itemName, initialValue){
 }
 
 function App() {
+
   const[todos, saveTodos] = useLocalStorage('TODOS_V1', []);
 
   
@@ -78,7 +79,14 @@ function App() {
     newTodos.splice(todoIndex, 1);
     saveTodos(newTodos);
   }
-  return (
+  console.log('Render antes del use efect');
+  
+  React.useEffect(() => {
+    console.log('Use effect')
+  }, [totalTodos]);
+
+  console.log('Render despues del use efect');
+  return ( 
     <AppUI
       totalTodos={totalTodos}
       completedTodos={completedTodos}
