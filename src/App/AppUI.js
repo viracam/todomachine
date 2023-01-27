@@ -7,6 +7,7 @@ import {TodoItem} from "../TodoItem";
 import {CreateTodoButton} from "../CreateTodoButton";
 
 function AppUI({
+      //Se reciben los efectos de carga con props
       loading,
       error,
       totalTodos,
@@ -35,6 +36,7 @@ function AppUI({
       
       {/* Depediendo del estado mostrará el mesaje */}
       <TodoList>
+        {/* // son condicionales */}
         {error && <p> desesperes</p>}
         {loading && <p>Estamos cargando no desesperes</p>}
         {(!loading && !searchedTodos.lenght) && <p>Crea tu primer todo</p>}

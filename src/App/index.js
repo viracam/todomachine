@@ -20,25 +20,29 @@ const defaultTodos = [
   },
 ];
 
-// Es un hook de react que usa localStroage para persistir los datos (solo recibe texto) y tiene el objeto initalValue
+// Es un hook propio de react que usa localStroage y debe tener 'use' para persistir los datos (solo recibe texto) y tiene el objeto initalValue y maneja los datos. No solo envia el arreglo, también envía el item.
 function useLocalStorage(itemName, initialValue){
+  // Se simulan los estados de carga  y sus correspondientes actulizadores
   const[error, setError] = React.useState(false);
+  // es verdadero porque se esta cargado
   const[loading, setLoading] = React.useState(true);
-  //Da el texto y el estado de cada todo
+  //Da el texto y EL ESTADO!! de cada todo
   const[item, setItem ] = React.useState(initialValue);
   
-
+// Es un hook que Maneja los Efectos: pueden ser de error, cargando o cargado, se ejecuta justo antes de hacer el render
   React.useEffect(() => {
+    // simula el tiempo de carga, el primer parametro es una funcion y el segundo el tiempo
     setTimeout(() => {
+      // los estados de error funcionan con try y catch
       try{ 
-        // usa local storage para obtener el primer elemento del hook use localStorage con la variable itemName
+        // usa local storage para obtener el algun elemento del hook use localStorage con la variable itemName
         const localStorageItem = localStorage.getItem(itemName);
 
         //Para saber si el usuario usó la aplicación con elementos parseados
         let parsedItem;
       // Si no existen elementos en el localStorage
         if(!localStorageItem){
-          // se crea un por defecto del array
+          // se crea un por defecto del array, el arreglo vacio se remplazó por el initialvalue
           localStorage.setItem(itemName, JSON.stringify(initialValue));
           // Debe ser  un arreglo vacio
           parsedItem = initialValue;
@@ -48,9 +52,12 @@ function useLocalStorage(itemName, initialValue){
           // se va a transformar en un array
           parsedItem = JSON.parse(localStorageItem);
         }
+        //Actualiza con la informacion del localStorage contenida en parsedItem
         setItem(parsedItem);
+        // Se cargo todo completamente y actualiza el estado de carga
         setLoading(false);
       } catch(error){
+        // si encuentra un error actualiza el estado que viene de APPUI PROS, Todolist
         setError(error)
       }
     }, 1000)
@@ -58,7 +65,7 @@ function useLocalStorage(itemName, initialValue){
 
 
   
-// Se persiten los datos con la funcion save, se llaman en complete y delete
+// Se persiten los datos con la funcion saveTodos, se llaman en complete y delete con la funcion de app que se renombra a saveTodos
   const saveItem = (newItem) =>{
     try{
       // se convierte en un string todos los nuevos items
@@ -74,8 +81,8 @@ function useLocalStorage(itemName, initialValue){
   };
 
   return {
-    item,
-    saveItem, //los retorna useLocalStorage y los usan en la funcion saveTodos()
+    item, //lo retorna en useLocalStorage
+    saveItem, //los retorna en useLocalStorage y los usan en la funcion saveTodos()
     loading,
     error,
 };
@@ -87,9 +94,9 @@ function App() {
   
   const{ 
       item: todos,
-      saveItem: saveTodos,
+      saveItem: saveTodos, //El renombrado funciona para complete y delete todo
       loading,
-      //useLocalStorage require dos parametros, el nombre del objeto y el arreglo(en texto).
+      //useLocalStorage require dos parametros, el nombre del objeto y el arreglo, para comenzar en cero se pone un arreglo vacio en vez de defaultTodos.
       error } = useLocalStorage('TODOS_V1', defaultTodos);
 
   
