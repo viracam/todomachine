@@ -1,22 +1,6 @@
 import React from "react";
 
-const defaultTodos = [
-    {
-      text: 'Cortar cebolla', completed: true,
-    },
-    {
-      text: 'Pesar', completed: true,
-    },
-    {
-      text: 'Llorar con la llorona', completed: false,
-    },
-    {
-      text: 'Llorar', completed: false,
-    },
-    {
-      text: 'la llorona', completed: false,
-    },
-  ];
+
   
   // Es un hook propio de react que usa localStroage y debe tener 'use' para persistir los datos (solo recibe texto) y tiene el objeto initalValue y maneja los datos. No solo envia el arreglo, también envía el item.
   function useLocalStorage(itemName, initialValue){
