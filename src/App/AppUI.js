@@ -8,6 +8,14 @@ import {TodoItem} from "../TodoItem";
 import {CreateTodoButton} from "../CreateTodoButton";
 
 function AppUI(){
+  // Envia los datos como si fuera un consumer, pero es una constante y guarda todos los props
+  const {
+    error,
+    loading,
+    searchedTodos,
+    completeTodo,
+    deleteTodo,
+  } = React.useContext(TodoContext);
     return(
         <React.Fragment>
       <TodoCounter />
@@ -15,16 +23,6 @@ function AppUI(){
       
       <TodoSearch/>
 
-      
-     <TodoContext.Consumer>
-      {({
-        error,
-        loading,
-        searchedTodos,
-        completeTodo,
-        deleteTodo,
-      }) => (
-         /* Depediendo del estado mostrará el mesaje */
       <TodoList>
         {/* // son condicionales */}
         {error && <p> desesperes</p>}
@@ -48,9 +46,8 @@ function AppUI(){
     
       ))}
     
-    </TodoList>
-      )}
-     </TodoContext.Consumer>
+      </TodoList>
+
       
       <CreateTodoButton/>
       
