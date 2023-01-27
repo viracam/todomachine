@@ -1,13 +1,14 @@
 import React from "react";
 import './CreateTodoButton.css';
  function CreateTodoButton(props){
-    const onClicKButton = (msg) =>{
-        alert(msg)
+    const onClicKButton = () =>{
+        //Prepstate devuelve el estado anterior a la actulización( osea click para este caso)
+        props.setOpenModal(prevState => !prevState);
     }
     return(
         <button
             className="CreateTodoButton"
-            onClick={() => onClicKButton('Aqui se debe activar el boton')}
+            onClick={onClicKButton}
         >+
         </button>
     );
