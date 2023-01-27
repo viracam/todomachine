@@ -1,64 +1,56 @@
 import React from "react";
 // Todos los componentes que tiene el app ui
+import { TodoContext } from "../TodoContext";
 import {TodoCounter} from "../TodoCounter";
 import {TodoSearch} from "../TodoSearch";
 import {TodoList} from "../TodoList";
 import {TodoItem} from "../TodoItem";
 import {CreateTodoButton} from "../CreateTodoButton";
 
-function AppUI({
-      //Se reciben los efectos de carga con props
-      loading,
-      error,
-      totalTodos,
-      completedTodos, //Envia el identificardor con todo.text cuando se hace clic en todoItem
-      searchValue,
-      setSearchValue,
-      searchedTodos,
-      completeTodo,
-      deleteTodo, // Envia el identificador, a todoItem con todotext
-}
-
-){
+function AppUI(){
     return(
         <React.Fragment>
-      <TodoCounter
-       total={totalTodos}
-       completed={completedTodos}
-       />
+      <TodoCounter />
 
       
-      <TodoSearch
-        // La información se captura desde el componente todoSearch
-        searchValue={searchValue}
-        setSearchValue={setSearchValue} />
+      <TodoSearch/>
 
       
-      {/* Depediendo del estado mostrará el mesaje */}
+     <TodoContext.Consumer>
+      {({
+        error,
+        loading,
+        searchedTodos,
+        completeTodo,
+        deleteTodo,
+      }) => (
+         /* Depediendo del estado mostrará el mesaje */
       <TodoList>
         {/* // son condicionales */}
         {error && <p> desesperes</p>}
         {loading && <p>Estamos cargando no desesperes</p>}
         {(!loading && !searchedTodos.lenght) && <p>Crea tu primer todo</p>}
-        
-        
-        {// Crea un arreglo con los diferentes todos usando como componente TodoItem
-        searchedTodos.map(todo =>(
-          
-          <TodoItem
-            // Todo es el initial value que viene del Hook useLocalStorage 
-            key={todo.text} 
-            text={todo.text}
-            completed={todo.completed}
-            // Se actuliza al hacer clic y toma el valor de la funcion CompleteTodo en App.js
-            onComplete={() => completeTodo(todo.text) }
-            // igual que en complete pero con delete
-            onDelete={() => deleteTodo(todo.text) }
-          />
       
-        ))}
       
-      </TodoList>
+      {// Crea un arreglo con los diferentes todos usando como componente TodoItem
+      searchedTodos.map(todo =>(
+        
+        <TodoItem
+          // Todo es el initial value que viene del Hook useLocalStorage 
+          key={todo.text} 
+          text={todo.text}
+          completed={todo.completed}
+          // Se actuliza al hacer clic y toma el valor de la funcion CompleteTodo en App.js
+          onComplete={() => completeTodo(todo.text) }
+          // igual que en complete pero con delete
+          onDelete={() => deleteTodo(todo.text) }
+        />
+    
+      ))}
+    
+    </TodoList>
+      )}
+     </TodoContext.Consumer>
       
       <CreateTodoButton/>
       
