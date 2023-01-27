@@ -10,7 +10,7 @@ function AppUI({
       loading,
       error,
       totalTodos,
-      completedTodo, //Envia el identificardor con todo.text cuando se hace clic en todoItem
+      completedTodos, //Envia el identificardor con todo.text cuando se hace clic en todoItem
       searchValue,
       setSearchValue,
       searchedTodos,
@@ -23,7 +23,7 @@ function AppUI({
         <React.Fragment>
       <TodoCounter
        total={totalTodos}
-       completed={completedTodo}
+       completed={completedTodos}
        />
 
       

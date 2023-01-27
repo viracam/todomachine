@@ -20,7 +20,7 @@ const defaultTodos = [
   },
 ];
 
-// Es un hook de react que usa localStroage para persistir los datos y tiene el objeto initalValue
+// Es un hook de react que usa localStroage para persistir los datos (solo recibe texto) y tiene el objeto initalValue
 function useLocalStorage(itemName, initialValue){
   const[error, setError] = React.useState(false);
   const[loading, setLoading] = React.useState(true);
@@ -30,14 +30,22 @@ function useLocalStorage(itemName, initialValue){
 
   React.useEffect(() => {
     setTimeout(() => {
-      try{
+      try{ 
+        // usa local storage para obtener el primer elemento del hook use localStorage con la variable itemName
         const localStorageItem = localStorage.getItem(itemName);
+
+        //Para saber si el usuario usó la aplicación con elementos parseados
         let parsedItem;
-      
+      // Si no existen elementos en el localStorage
         if(!localStorageItem){
+          // se crea un por defecto del array
           localStorage.setItem(itemName, JSON.stringify(initialValue));
+          // Debe ser  un arreglo vacio
           parsedItem = initialValue;
-        }else{
+        }
+        // ya tiene algun todo
+        else{
+          // se va a transformar en un array
           parsedItem = JSON.parse(localStorageItem);
         }
         setItem(parsedItem);
@@ -50,11 +58,14 @@ function useLocalStorage(itemName, initialValue){
 
 
   
-
+// Se persiten los datos con la funcion save, se llaman en complete y delete
   const saveItem = (newItem) =>{
     try{
+      // se convierte en un string todos los nuevos items
       const stringifiedItem = JSON.stringify(newItem);
+      // se crea un nuevo array con la variable itemname y su array en string parametro que está en uselocalStorage
       localStorage.setItem(itemName, stringifiedItem);
+      // Para que al recargar la pagina el nuevo item se mantega
       setItem(newItem);
     } catch(error){
       setError(error);
@@ -64,7 +75,7 @@ function useLocalStorage(itemName, initialValue){
 
   return {
     item,
-    saveItem,
+    saveItem, //los retorna useLocalStorage y los usan en la funcion saveTodos()
     loading,
     error,
 };
@@ -78,7 +89,7 @@ function App() {
       item: todos,
       saveItem: saveTodos,
       loading,
-      //useLocalStorage require dos parametros, el nombre del objeto y el arreglo.
+      //useLocalStorage require dos parametros, el nombre del objeto y el arreglo(en texto).
       error } = useLocalStorage('TODOS_V1', defaultTodos);
 
   
