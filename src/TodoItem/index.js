@@ -1,4 +1,6 @@
 import React from "react";
+import { CompleteIcon } from '../TodoIcon/CompleteIcon';
+import { DeleteIcon } from '../TodoIcon/DeleteIcon';
 import './TodoItem.css'; // se importa el css
 
  function TodoItem(props){
@@ -10,17 +12,17 @@ import './TodoItem.css'; // se importa el css
 
     return(
         <li className="TodoItem">
-            <span // Se recibe la propiedad que viene de appUi completeTodo
-                className={`Icon Icon-check ${props.completed &&  'Icon-check--active'}`}
-                onClick={props.onComplete}>
-                √
-            </span>
+            <CompleteIcon // Se recibe la propiedad que viene de CompleteIcon
+                completed={props.completed}
+                onClick={props.onComplete}
+                
+           />
             <p 
                 className={`TodoItem-p ${props.completed && 'TodoItem-p--complete'}`}
                 >{props.text}</p>
-            <span // Se recibe la propiedad que viene de appUi deleteTodo
-                className="Icon Icon-delete"
-                onClick={props.onDelete}>X</span>
+                  <DeleteIcon
+                        onDelete={props.onDelete}
+                    />
         </li>
     );
 
