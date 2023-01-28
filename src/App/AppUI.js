@@ -8,6 +8,10 @@ import { TodoForm } from "../TodoForm";
 import {TodoItem} from "../TodoItem";
 import {CreateTodoButton} from "../CreateTodoButton";
 import { Modal } from "../Modal";
+// Skeleton loading
+import {TodosError} from '../TodosError'
+import{TodosLoading} from '../TodosLoading'
+import{EmptyTodos} from '../EmptyTodos'
 
 
 function AppUI(){
@@ -30,9 +34,9 @@ function AppUI(){
 
       <TodoList>
         {/* // son condicionales */}
-        {error && <p> desesperes</p>}
-        {loading && <p>Estamos cargando no desesperes</p>}
-        {(!loading && !searchedTodos.lenght) && <p>Crea tu primer todo</p>}
+        {error && <TodosError error={error}/>}
+        {loading && <TodosLoading/>}
+        {(!loading && !searchedTodos.lenght) && <EmptyTodos/>}
       
       
       {// Crea un arreglo con los diferentes todos usando como componente TodoItem
