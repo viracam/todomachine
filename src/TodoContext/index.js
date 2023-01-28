@@ -1,23 +1,23 @@
 import React from "react";
 import { useLocalStorage } from "./useLocalStorage";
 
-const defaultTodos = [
-    {
-      text: 'Cortar cebolla', completed: true,
-    },
-    {
-      text: 'Pesar', completed: true,
-    },
-    {
-      text: 'Llorar con la llorona', completed: false,
-    },
-    {
-      text: 'Llorar', completed: false,
-    },
-    {
-      text: 'la llorona', completed: false,
-    },
-  ];
+// const defaultTodos = [
+//     {
+//       text: 'Cortar cebolla', completed: true,
+//     },
+//     {
+//       text: 'Pesar', completed: true,
+//     },
+//     {
+//       text: 'Llorar con la llorona', completed: false,
+//     },
+//     {
+//       text: 'Llorar', completed: false,
+//     },
+//     {
+//       text: 'la llorona', completed: false,
+//     },
+//   ];
 
 //El contexto tambien recibe dos propieades: Provider y Consumer
 const TodoContext = React.createContext();
@@ -28,7 +28,7 @@ function TodoProvider(props){
         saveItem: saveTodos, //El renombrado funciona para complete y delete todo
         loading,
         //useLocalStorage require dos parametros, el nombre del objeto y el arreglo, para comenzar en cero se pone un arreglo vacio en vez de defaultTodos.
-        error } = useLocalStorage('TODOS_V1', defaultTodos);
+        error } = useLocalStorage('TODOS_V1', []);
   
     
     // Cuando inicia la applicación deja un string vacio que es el estado, e inicializa los dos parametros para el todo search
@@ -82,6 +82,18 @@ function TodoProvider(props){
       //   completed: true,
       // }
     }
+    
+    const addTodo = (text) =>{
+      const newTodos = [...todos];
+      // La variable text para el nuevo array de todos se toma del modal
+      newTodos.push({
+        completed: false,
+        text
+      });
+      //se actuliza el estado, con un re-render en setTodos del local.
+      saveTodos(newTodos);
+  
+    }
     // Método para eliminar el todo con una funcion, envía el texto del todo y se repite todo al igual que en completeTodo excepto por el splice.
     const deleteTodo = (text) =>{
   
@@ -103,6 +115,7 @@ function TodoProvider(props){
       searchValue,
       setSearchValue,
       searchedTodos,// un arreglo del estado con su objeto que contiene a la llave, el texto, el estado y dos funciones (complete y delete)
+      addTodo,
       completeTodo, //son props hijos de TodoList que al mismo tiempo estan contenidos en todo item que contienes la prop searchedTodos
       deleteTodo,
       openModal,

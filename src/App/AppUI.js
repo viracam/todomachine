@@ -4,9 +4,11 @@ import { TodoContext } from "../TodoContext";
 import {TodoCounter} from "../TodoCounter";
 import {TodoSearch} from "../TodoSearch";
 import {TodoList} from "../TodoList";
+import { TodoForm } from "../TodoForm";
 import {TodoItem} from "../TodoItem";
 import {CreateTodoButton} from "../CreateTodoButton";
 import { Modal } from "../Modal";
+
 
 function AppUI(){
   // Envia los datos como si fuera un consumer, pero es una constante y guarda todos los props, la inforación trae desde TodoContext
@@ -53,7 +55,7 @@ function AppUI(){
       {!!openModal && (
         
         <Modal>
-          <p>{searchedTodos[0]?.text}</p>
+          <TodoForm/>
         </Modal>
       )}
       
